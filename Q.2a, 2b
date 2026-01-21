@@ -1,0 +1,89 @@
+class ArrayQueue {
+    int[] arr;
+    int front = 0, rear = -1, size;
+
+    ArrayQueue(int capacity) {
+        size = capacity;
+        arr = new int[size];
+    }
+
+    void enqueue(int data) {
+        if (rear == size - 1) resize();
+        arr[++rear] = data;
+    }
+
+    void resize() {
+        int[] newArr = new int[size * 2];
+        for (int i = 0; i < size; i++)
+            newArr[i] = arr[i];
+        arr = newArr;
+        size *= 2;
+        System.out.println("Resized to " + size);
+    }
+
+    int dequeue() {
+        if (front > rear) return -1;
+        return arr[front++];
+    }
+
+    void display() {
+        for (int i = front; i <= rear; i++)
+            System.out.print(arr[i] + " ");
+        System.out.println();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        ArrayQueue q = new ArrayQueue(3);
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+        q.enqueue(40);
+
+        q.display();
+        q.dequeue();
+        q.display();
+    }
+}
+
+//2b
+class LinkedListQueue {
+
+    class Node {
+        int data;
+        Node next;
+        Node(int data) { this.data = data; }
+    }
+
+    Node front, rear;
+
+    void enqueue(int data) {
+        Node n = new Node(data);
+        if (rear == null) front = rear = n;
+        else {
+            rear.next = n;
+            rear = n;
+        }
+    }
+
+    int dequeue() {
+        if (front == null) return -1;
+        int val = front.data;
+        front = front.next;
+        if (front == null) rear = null;
+        return val;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+
+        LinkedListQueue q = new LinkedListQueue();
+        q.enqueue(10);
+        q.enqueue(20);
+        q.enqueue(30);
+
+        System.out.println(q.dequeue());
+    }
+}
