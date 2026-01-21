@@ -1,0 +1,38 @@
+class BST {
+
+    class Node {
+        int data;
+        Node left, right;
+        Node(int d) { data = d; }
+    }
+
+    Node root;
+
+    Node insert(Node r, int d) {
+        if (r == null) return new Node(d);
+        if (d < r.data) r.left = insert(r.left, d);
+        else r.right = insert(r.right, d);
+        return r;
+    }
+
+    void inorder(Node r) {
+        if (r != null) {
+            inorder(r.left);
+            System.out.print(r.data + " ");
+            inorder(r.right);
+        }
+    }
+}
+ public class Main {
+    public static void main(String[] args) {
+
+        BST tree = new BST();
+        tree.root = tree.insert(tree.root, 50);
+        tree.insert(tree.root, 30);
+        tree.insert(tree.root, 70);
+        tree.insert(tree.root, 20);
+        tree.insert(tree.root, 40);
+
+        tree.inorder(tree.root);
+    }
+}
