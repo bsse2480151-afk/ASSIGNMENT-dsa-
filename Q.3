@@ -1,0 +1,30 @@
+class Searching {
+
+    static int binarySearchIter(int[] arr, int key) {
+        int l = 0, r = arr.length - 1;
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (arr[m] == key) return m;
+            if (arr[m] < key) l = m + 1;
+            else r = m - 1;
+        }
+        return -1;
+    }
+
+    static int linearSearchRec(int[] arr, int i, int key) {
+        if (i == arr.length) return -1;
+        if (arr[i] == key) return i;
+        return linearSearchRec(arr, i + 1, key);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+
+        int[] arr = {3, 8, 12, 20, 25, 30};
+
+        System.out.println(Searching.binarySearchIter(arr, 20));
+        System.out.println(Searching.linearSearchRec(arr, 0, 12));
+    }
+}
+
